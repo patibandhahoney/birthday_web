@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>✨ Happy Birthday Mr. Roaster! 🎉 ✨</title>
+	<meta charset="UTF-8" />
+	<meta name="description" content="Epic Birthday Celebration for the Best Friend">
+	<meta name="robots" content="index, follow" />
+	<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Signika:wght@400;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	
+	<!-- Bootstrap 3 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+	<link rel="stylesheet" type="text/css" href="css/loading.css">
+	
+	<!-- Canvas Confetti Library -->
+	<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+	<!-- Loading Screen -->
+	<div class="loading">
+		<div class="loading-content">
+			<div class="loading-spinner"></div>
+			<p class="loading-text">Preparing Your Party... 🎉</p>
+		</div>
+	</div>
+
+	<!-- Ambient Starry Dust Particle Canvas -->
+	<canvas id="ambient-canvas"></canvas>
+
+	<!-- Floating Music Visualizer Pill -->
+	<div class="music-pill" id="music-pill">
+		<div class="music-pill-icon"><span class="glyphicon glyphicon-music"></span></div>
+		<div class="music-pill-info">
+			<span class="music-pill-title">Frindzz Anthem 🎵</span>
+			<div class="equalizer-bars" id="equalizer-bars">
+				<span></span><span></span><span></span><span></span>
+			</div>
+		</div>
+		<button type="button" class="music-pill-btn" id="music-toggle-btn" title="Play / Pause Audio">▶</button>
+	</div>
+
+	<!-- Responsive Polaroid Memory Album -->
+	<div class="album-container" id="album-container">
+		<div class="polaroid-card album-left-1" data-photo="assets/images/photo1.jpg" data-caption="Crime Partners 🤜🤛">
+			<div class="polaroid-tape"></div>
+			<div class="polaroid-img-wrapper">
+				<img src="assets/images/photo1.jpg" alt="Bestie Memory 1" loading="lazy">
+			</div>
+			<div class="polaroid-caption">Crime Partners 🤜🤛</div>
+		</div>
+		<div class="polaroid-card album-left-2" data-photo="assets/images/photo2.jpg" data-caption="Laughs & Chaos 😂✨">
+			<div class="polaroid-tape"></div>
+			<div class="polaroid-img-wrapper">
+				<img src="assets/images/photo2.jpg" alt="Bestie Memory 2" loading="lazy">
+			</div>
+			<div class="polaroid-caption">Laughs & Chaos 😂✨</div>
+		</div>
+		<div class="polaroid-card album-right-1" data-photo="assets/images/photo3.jpg" data-caption="Certified Legend 🌟">
+			<div class="polaroid-tape"></div>
+			<div class="polaroid-img-wrapper">
+				<img src="assets/images/photo3.jpg" alt="Bestie Memory 3" loading="lazy">
+			</div>
+			<div class="polaroid-caption">Certified Legend 🌟</div>
+		</div>
+		<div class="polaroid-card album-right-2" data-photo="assets/images/photo4.jpg" data-caption="Good Times Always 🎉">
+			<div class="polaroid-tape"></div>
+			<div class="polaroid-img-wrapper">
+				<img src="assets/images/photo4.jpg" alt="Bestie Memory 4" loading="lazy">
+			</div>
+			<div class="polaroid-caption">Good Times Always 🎉</div>
+		</div>
+	</div>
+
+	<!-- Hint for photo zoom -->
+	<div class="zoom-hint" id="zoom-hint">
+		<img src="assets/images/can-zoom.png" class="can-zoom" alt="Click any photo to zoom">
+	</div>
+
+	<!-- Audio Element -->
+	<audio class="song" id="birthday-audio" loop preload="auto">
+		<source src="assets/audio/hbd.mp3" type="audio/mpeg">
+		Your browser does not support the audio element.
+	</audio>
+
+	<!-- Balloons: Spelling H B D B E S T I E (Best Friend Theme) -->
+	<div class="balloons text-center" id="b1" title="Click to pop!"><h2>H</h2></div>
+	<div class="balloons text-center" id="b2" title="Click to pop!"><h2>B</h2></div>
+	<div class="balloons text-center" id="b3" title="Click to pop!"><h2>D</h2></div>
+	<div class="balloons text-center" id="b4" title="Click to pop!"><h2>A</h2></div>
+	<div class="balloons text-center" id="b5" title="Click to pop!"><h2>R</h2></div>
+	<div class="balloons text-center" id="b6" title="Click to pop!"><h2>Y</h2></div>
+	<div class="balloons text-center" id="b7" title="Click to pop!"><h2>A</h2></div>
+	<div class="balloons text-center" id="b8" title="Click to pop!"><h2>N</h2></div>
+
+	<!-- Top Balloon Border -->
+	<img src="assets/images/Balloon-Border.png" class="balloon-border" alt="Balloons decoration">
+
+	<!-- Main Content Stage Container -->
+	<div class="container main-stage">
+		<!-- Fairy Lights Bulbs Row -->
+		<div class="row bulb-string-row">
+			<div class="col-xs-2 bulb-holder">
+				<div class="bulb-wire"></div>
+				<div class="bulb" id="bulb_yellow"></div>
+			</div>
+			<div class="col-xs-2 bulb-holder">
+				<div class="bulb-wire"></div>
+				<div class="bulb" id="bulb_red"></div>
+			</div>
+			<div class="col-xs-2 bulb-holder">
+				<div class="bulb-wire"></div>
+				<div class="bulb" id="bulb_blue"></div>
+			</div>
+			<div class="col-xs-2 bulb-holder">
+				<div class="bulb-wire"></div>
+				<div class="bulb" id="bulb_green"></div>
+			</div>
+			<div class="col-xs-2 bulb-holder">
+				<div class="bulb-wire"></div>
+				<div class="bulb" id="bulb_pink"></div>
+			</div>
+			<div class="col-xs-2 bulb-holder">
+				<div class="bulb-wire"></div>
+				<div class="bulb" id="bulb_orange"></div>
+			</div>
+		</div>
+
+		<!-- Decorative Banner -->
+		<div class="row">
+			<div class="col-md-12 text-center banner-wrap">
+				<img src="assets/images/banner.png" class="bannar" alt="Happy Birthday Banner">
+			</div>
+		</div>
+
+		<!-- Cake & Live Webcam Section (Side-by-Side Flex Layout) -->
+		<div class="row cake-cover">
+			<div class="col-md-12 text-center cake-stage-wrapper">
+				<div class="cake-and-cam-stage" id="cake-and-cam-stage" style="display:none;">
+					
+					<!-- Interactive Birthday Cake -->
+					<div class="cake" id="birthday-cake">
+						<div class="velas" id="candle-stick" title="Click flame to blow out / relight candle!">
+							<div class="fuego" id="candle-flame"></div>
+							<div class="fuego"></div>
+							<div class="fuego"></div>
+							<div class="fuego"></div>
+							<div class="fuego"></div>
+							<div class="candle-smoke" id="candle-smoke"></div>
+						</div>
+						<div class="cobertura">
+							<div class="drip drip-1"></div>
+							<div class="drip drip-2"></div>
+							<div class="drip drip-3"></div>
+						</div>
+						<div class="bizcocho">
+							<div class="cake-sprinkles"></div>
+						</div>
+						<div class="cake-plate"></div>
+						<div class="candle-hint" id="candle-hint">✨ Tap flame to make a wish!</div>
+					</div>
+
+					<!-- Live Birthday Webcam Card (Side-by-Side Frame) -->
+					<div class="webcam-card" id="webcam-card">
+						<div class="webcam-header">
+							<span class="live-dot"></span>
+							<span class="live-label">Aryans LIVE CAM 📸</span>
+						</div>
+						
+						<div class="webcam-frame-wrapper">
+							<!-- Live Video Stream -->
+							<video id="webcam-video" autoplay playsinline muted></video>
+							
+							<!-- Canvas for snapshot capturing -->
+							<canvas id="webcam-canvas" style="display:none;"></canvas>
+							
+							<!-- Live Party Sticker Overlay -->
+							<div class="party-sticker-overlay" id="party-sticker-overlay">👑</div>
+							
+							<!-- Camera Flash FX -->
+							<div class="camera-flash" id="camera-flash"></div>
+							
+							<!-- Fallback if camera is off or denied -->
+							<div class="webcam-fallback" id="webcam-fallback">
+								<div class="fallback-icon">🎂</div>
+								<p class="fallback-text">Birthday Legend 🌟</p>
+								<button type="button" class="btn-cam-enable" id="btn-enable-cam">
+									<span class="glyphicon glyphicon-camera"></span> Turn On Cam
+								</button>
+							</div>
+						</div>
+						
+						<!-- Interactive Webcam Control Toolbar -->
+						<div class="webcam-controls">
+							<button type="button" class="btn-cam-action" id="btn-snap-photo" title="Take a Birthday Selfie!">
+								📸 Snap Selfie
+							</button>
+							<button type="button" class="btn-cam-action" id="btn-cycle-sticker" title="Change Fun Party Hat / Shades">
+								🥸 Fun Filter
+							</button>
+							<button type="button" class="btn-cam-action" id="btn-toggle-camera" title="Toggle Camera On/Off">
+								🔄 Cam
+							</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- Story & Narrative Message (Best Friend Edition!) -->
+		<div class="row message-wrapper">
+			<div class="col-md-10 col-md-offset-1 text-center message-card">
+				<div class="message-decor-top">🔥 🤜🤛 🔥</div>
+				<div class="message" id="message-container">
+					<p>Yo Harami..! 👋😂</p>
+					<p>Look who just leveled up another year! 🎮</p>
+					<p>Another year older... 👴</p>
+					<p>...and absolutely 0% wiser! 📉😜</p>
+					<p><strong>however...</strong></p>
+					<p>today is seriously special 🌟</p>
+					<p>because the world got blessed with a legend! 🎂</p>
+					<p>Good friends know all your stories... 📖</p>
+					<p>Best friends helped you make all the terrible decisions! 🤫🚓</p>
+					<p>I built this entire website for you 🎁</p>
+					<p>to celebrate the funniest, craziest friend ever! 🥳</p>
+					<p>Thanks for always having my back 🤜🤛</p>
+					<p>through every laugh, inside joke & crazy memory 💫</p>
+					<p>May this year bring you massive success 🚀</p>
+					<p>infinite money, zero stress & endless free food! 🍕💰</p>
+					<p>Keep shining and being your awesome self ⭐</p>
+					<p>lastly...</p>
+					<p class="final-wish">HAPPY BIRTHDAY TO MY BEST FRIEND! 🎉🍻🎂</p>
+				</div>
+				<div class="message-decor-bottom">🔥 🤜🤛 🔥</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Clean Floating Interactive Button (No Placeholders or Icon Shapes) -->
+	<nav class="navbar navbar-fixed-bottom celebration-nav-dock">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 text-center">
+					<div class="action-buttons-group">
+						<button class="btn btn-celebration pulse-btn" id="turn_on">Turn On Lights</button>
+						<button class="btn btn-celebration" id="play" style="display:none;">Play Party Beat</button>
+						<button class="btn btn-celebration" id="bannar_coming" style="display:none;">Hang the Banner</button>
+						<button class="btn btn-celebration" id="balloons_flying" style="display:none;">Fly Balloons</button>
+						<button class="btn btn-celebration" id="cake_fadein" style="display:none;">Bring Cake & Live Cam!</button>
+						<button class="btn btn-celebration" id="light_candle" style="display:none;">Light the Candle</button>
+						<button class="btn btn-celebration" id="wish_message" style="display:none;">Happy Birthday!</button>
+						<button class="btn btn-celebration" id="story" style="display:none;">Aryan's Message</button>
+						<!-- Final Reveal Button (Triggered after reading message) -->
+						<button class="btn btn-celebration btn-surprise-reveal" id="continue_to_surprise" style="display:none;">Open Your Surprise Note!</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Surprise Secret Note Modal -->
+	<div class="surprise-modal" id="surprise-modal">
+		<div class="surprise-dialog">
+			<button class="surprise-close" id="surprise-close" title="Close Secret Note">&times;</button>
+			<div class="surprise-envelope">
+				<div class="surprise-stamp">SECRET BIRTHDAY NOTE 💌</div>
+				<h3 class="surprise-title">Dear Aryan! 🎂</h3>
+				<p class="surprise-subtitle">To My Best Friend & Partner-in-Crime 🤜🤛</p>
+				
+				<div class="surprise-letter">
+					<p class="letter-body-text">
+						<strong>Aryan, yaar...</strong> itne saalon mein tune mujhe jitni baar pareshan kiya hai, isi liye tu MR. Roaster hi Thik hai. utni baar hi hasaya bhi hai no doubt — so I guess we're even! 😂
+					</p>
+					
+					<p class="letter-body-text">
+						Aaj ke din bas itna chahti hoon: teri life mein utni hi masti rahe jitni tu doosron ki life mein laata hai. 🌟🚀
+					</p>
+
+					<p class="letter-body-text">
+						Cake zyada kha, roast kam kar — <em>(bas aaj ke din ke liye!)</em> 🍰😜
+					</p>
+					
+					<div class="letter-bestie-tag">
+						<span>🎉 Stay awesome always & Happy Birthday Brooooiiii! 🍻</span>
+					</div>
+
+					<p class="letter-signature">Signed with craziness & infinite support 💫</p>
+				</div>
+				
+				<div class="surprise-actions">
+					<button type="button" class="btn-surprise-action btn-ack" id="btn-ack-surprise">
+						🍻 Cheers Aryan!
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Enhanced Lightbox Modal with Caption & Download -->
+	<div class="lightbox" id="lightbox">
+		<div class="lightbox-dialog">
+			<button class="lightbox-close" id="lightbox-close" title="Close preview">&times;</button>
+			<div class="lightbox-img-box">
+				<img src="" alt="Enlarged photo memory" id="lightbox-img">
+			</div>
+			<div class="lightbox-bar">
+				<span class="lightbox-caption-text" id="lightbox-caption">Cherished Birthday Memory</span>
+				<a href="#" class="lightbox-btn-download" id="lightbox-download-link" download="birthday-memory.jpg">
+					📥 Save Photo
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Scripts -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="js/effect.js"></script>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-8SQ2H9J48M"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-8SQ2H9J48M');
+	</script>
+</body>
+</html>
